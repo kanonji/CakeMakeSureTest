@@ -46,6 +46,15 @@ class ClassRegistryTest extends CakeTestCase {
 		$this->assertSame($User, $User2);
 	}
 
+	public function testInstance_from_ClassRegistry_keeps_properties(){
+		$User  = ClassRegistry::init('User');
+		$User->set(array('name' => 'foo'));
+		$User2 = ClassRegistry::init('User');
+
+		$expected = array('User' => array('name' => 'foo'));
+		$this->assertEquals($expected, $User2->data);
+	}
+
 /**
  * tearDown method
  *
